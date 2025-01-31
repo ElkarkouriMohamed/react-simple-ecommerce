@@ -1,0 +1,207 @@
+.sign-in-home {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    padding-top: 72px;
+}
+.signIn-methods-container {
+    height: 100%;
+    width: 400px;
+    padding-inline: min(2em, 7%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+@media screen and (max-width: 700px) {
+    .sign-in-home {
+        height: calc(100vh - 72px);
+    }
+    .sign-in-home {
+        padding-top: 0;
+    }
+    .signIn-methods-container {
+        width: 100%;
+    }
+    /* .signIn-methods-container {
+        height: calc(100% - 72px);
+    } */
+}
+/* @media screen and (max-width: 600px) {
+    
+} */
+
+.signIn-methods-container .login-title {
+    font-size: 22px;
+    font-weight: 600;
+}
+.signIn-methods-container .login-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+.signIn-methods-container .google, .email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    border: 2px solid #727D73;
+    padding: .8em 2.5em;
+    border-radius: .3em;
+    cursor: pointer;
+    background: none;
+}
+.signIn-methods-container .google:hover, 
+.signIn-methods-container .email:hover {
+    background-color: #f8ede7;
+}
+.google span, .email span {
+    font-size: 16px;
+}
+.signIn-methods-container .sign-up-choice {
+    font-size: 17px
+}
+.signIn-methods-container .sign-up-choice a {
+    text-decoration: none;
+    color: rgb(67, 67, 255);
+    cursor: pointer;
+}
+.coverImage {
+    width: 100%;
+    background-image: url('../images/login.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.sign-in-email .coverImage:not(.forgot-password .coverImage, .sign-up .coverImage) {
+    box-shadow: 8px 0 0 rgba(0, 0, 0, 0.08);
+}
+@media screen and (max-width: 1000px) {
+    .coverImage {
+        background-image: url('../images/table-login.jpg');
+    }
+}
+@media screen and (max-width: 800px) {
+    .coverImage {
+        background-image: url('../images/mobile-login.jpg');
+    }
+}
+.sign-in-email {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    padding-top: 72px;
+}
+.sign-in-email .main {
+    height: 100%;
+    width: 400px;
+    /* padding-inline: min(2em, 7%); */
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+/* @media screen and (max-width: 600px) {
+
+} */
+@media screen and (max-width: 700px) {
+    .sign-in-email {
+        height: calc(100vh - 72px);
+        padding-top: 0;
+
+    }
+    .sign-in-email .main {
+        width: 100%;
+    }
+}
+.sign-in-email .main .welcome-text {
+    height: 15%;
+    display: flex;
+    padding-top: 1em;
+    margin-bottom: 1em;
+}
+@media screen and (max-width: 700px) {
+    .sign-in-email .main .welcome-text {
+        display: none;
+    }
+}
+.main .welcome-text span {
+    height: 70px;
+    padding: .7em 2em;
+    background: linear-gradient(to right, #181C14, #3C3D37 ); ;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 0 1.7em 1.7em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sign-in-email .main .userIcon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+}
+.sign-in-email .main .userIcon svg {
+    width: 120px; 
+    height: 120px; 
+    fill: #343131;
+}
+.main .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2em;    
+}
+.form-email ,
+.form-password {
+    margin-bottom: 1em;
+}
+.main .login-form .form-email input,
+.form-password input {
+    width: 270px;
+    padding: .7em;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #686D76;
+    padding-left: 0;
+    font-size: 18px;
+    margin-bottom: .5em;
+}
+.form-email input::placeholder,
+.form-password input::placeholder {
+    color: #686D76;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+.main .login-form .submit-button {
+    margin-top: 1em;
+    border: none;
+    background: none;
+    background-color: #686D76;
+    color: white;
+    padding: .5em 2em;
+    font-size: 20px;
+    letter-spacing: 1px;
+    border-radius: 2em;
+}
+.main .forgot-password {
+    padding: 2em;
+    text-align: center;
+}
+.main .forgot-password a {
+    text-decoration: none;
+    color: #3C3D37;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #3C3D37;
+    padding: 2px;
+}
+.main .passowrd-errors,
+.email-errors {
+    letter-spacing: .5px;
+}
+

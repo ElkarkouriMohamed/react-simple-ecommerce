@@ -1,0 +1,86 @@
+:root {
+    --border-raduis: .6em;
+    --main-color-singUp: #EEEEEE;
+}
+.sign-up .main .template {
+    font-family: "Montserrat", serif;
+    font-weight: 600; /* Example weight */
+    font-style: normal;
+    gap: 1em;
+}
+.sign-up .main .template .title {
+    font-size: 2.3em;
+    font-weight: 800;
+    color: #727D73;
+    text-align: center;
+    margin-bottom: .4em;
+}
+.sign-up .main .template .google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    border: none;
+    padding: .6em 2em;
+    border-radius: var(--border-raduis);
+    cursor: pointer;
+    font-weight: 500;
+    background-color: var(--main-color-singUp);
+    transition: background-color 300ms;
+}
+.sign-up .main .template .google:hover {
+    background-color: #9AA6B2;
+}
+.sign-up .main .template .google img {
+    width: 20px;
+    height: 20px;
+}
+.sign-up .main .template .or-line span {
+    font-weight: 600;
+}
+.sign-up .main .template .or-line hr{
+    height: 2px;
+    border: none;
+    background-color: black;
+    border-radius: 6px;
+}
+.sign-up .main .template .form .full-name div {
+    width: 47%;
+}
+.sign-up .main .template .form label {
+    margin-bottom: .3em;
+    padding-left: .2em;
+}
+.sign-up .main .template .form  input {
+    border: none;
+    outline: none;
+    background-color: var(--main-color-singUp);
+    border-radius: var(--border-raduis);
+    padding: .6em;
+    width: 100%;
+    height: 2.7em;
+}
+.sign-up .main .template .form .input-not-valid {
+    border: 3px solid #F95454; 
+}
+.sign-up .main .template .sign-up-button {
+    font-size: 1.3em;
+    font-weight: 600;
+    background-color: #727D73;
+    color: white;
+    border-radius: var(--border-raduis);
+    padding: .5em 1.3em;
+    transition: background-color 300ms;
+}
+.sign-up .main .template .sign-up-button:hover {
+    background-color: #BCCCDC;
+}
+.sign-up .main .template .sign-in-back a {
+    text-decoration: none;
+}
+.sign-up .main .template .sign-in-back {
+    font-weight: 500;
+}
+.sign-up .main .template .sign-in-back a:hover {
+    color: #727D73;
+}
