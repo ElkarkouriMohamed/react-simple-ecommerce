@@ -3,6 +3,7 @@ import "../../css/forgot-password.css";
 import { Link } from "react-router-dom";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../../firebase/firebase";
+import Footer from "../../footer/Footer";
 
 export default function PasswordReset() {
   const [emailIsValid, setEmailIsValid] = useState(false);
@@ -39,38 +40,38 @@ export default function PasswordReset() {
     return messages[code] || "An unknown error occurred. Please try again.";
   }
   return (
-    <div className="sign-in-email forgot-password">
-      <div className="coverImage"></div>
-      <div className="main justify-center items-center">
-        <div className="form flex flex-col">
-          <div className="title">
-            Forgot <br />
-            Your Password ?
-          </div>
-          <div className="reset-input">
-            <input
-              type="text"
-              ref={emailRef}
-              placeholder="Email Address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            {!emailIsValid && email.length !== 0 ? (
-              <div className="text-red-600">The email address is not valid.</div>
-            ) : (
-              message.length > 0 && <div className="text-red-600">{message}</div>
-            )}
-          </div>
-          <div className="buttons flex flex-col gap-3">
-            <button className="reset-button p-2 rounded-lg" onClick={handleReset}>
-              Reset Password
-            </button>
-            <div className="text-center">
-              <Link to="/sign-in-email">Back to sign-in</Link>
+      <div className="sign-in-email forgot-password sign-up mt-[56px] sm:mt-[72px] h-[calc(100vh-56px)] sm:h-[calc(100vh-72px)]">
+        <div className="coverImage"></div>
+        <div className="main justify-center items-center">
+          <div className="form flex flex-col">
+            <div className="title">
+              Forgot <br />
+              Your Password ?
+            </div>
+            <div className="reset-input">
+              <input
+                type="text"
+                ref={emailRef}
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              {!emailIsValid && email.length !== 0 ? (
+                <div className="text-red-600">The email address is not valid.</div>
+              ) : (
+                (message.length > 0) && <div className="text-red-600">{message}</div>
+              )}
+            </div>
+            <div className="buttons flex flex-col gap-3">
+              <button className="reset-button p-2 rounded-lg" onClick={handleReset}>
+                Reset Password
+              </button>
+              <div className="text-center">
+                <Link to="/sign-in-email">Back to sign-in</Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 }

@@ -4,6 +4,7 @@ import SignInWithGoogle from "../signIn/withGoogle/SignInWithGoogle";
 import "../css/signUp.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
+import Footer from "../footer/Footer";
 
 export default function SignUp() {
     const [isValid, setIsvalid] = useState(false);
@@ -100,74 +101,74 @@ export default function SignUp() {
         return messages[code] || "An unknown error occurred. Please try again.";
     };
     return (
-        <div className="sign-in-email sign-up">
-            <div className="coverImage"></div>
-            <div className="main justify-center items-center">
-                <div className="template p-4 flex flex-col">
-                    <div className="title">Sign up</div>
-                    <SignInWithGoogle />
-                    <div className="or-line flex items-center">
-                        <hr className=".sign-up .main .templateleft w-full" />
-                        <span className="px-3">Or</span>
-                        <hr className="w-full" />
-                    </div>
-                    <div className="form flex flex-col gap-3">
-                        <div className="full-name flex justify-between">
-                            <div>
-                                <label htmlFor="firstNameId">First Name</label>
+            <div className="sign-in-email sign-up mt-[56px] sm:mt-[72px] h-[calc(100vh-56px)] sm:h-[calc(100vh-72px)]">
+                <div className="coverImage"></div>
+                <div className="main justify-center items-center">
+                    <div className="template p-4 flex flex-col">
+                        <div className="title">Sign up</div>
+                        <SignInWithGoogle />
+                        <div className="or-line flex items-center">
+                            <hr className=".sign-up .main .templateleft w-full" />
+                            <span className="px-3">Or</span>
+                            <hr className="w-full" />
+                        </div>
+                        <div className="form flex flex-col gap-3">
+                            <div className="full-name flex justify-between">
+                                <div>
+                                    <label htmlFor="firstNameId">First Name</label>
+                                    <input
+                                        type="text"
+                                        id="firstNameId"
+                                        className="w-full"
+                                        onChange={(e) => handleChange(e)}
+                                        ref={firstNameRef}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="lastNameId">Last Name</label>
+                                    <input
+                                        type="text"
+                                        id="lastNameId"
+                                        className="w-full"
+                                        onChange={(e) => handleChange(e)}
+                                        ref={lastNameRef}
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex flex-col">
+                                <label htmlFor="emailId">Email Address</label>
                                 <input
                                     type="text"
-                                    id="firstNameId"
-                                    className="w-full"
+                                    id="emailId"
                                     onChange={(e) => handleChange(e)}
-                                    ref={firstNameRef}
+                                    ref={emailRef}
+                                    
                                 />
                             </div>
-                            <div>
-                                <label htmlFor="lastNameId">Last Name</label>
+                            <div className="flex flex-col">
+                                <label htmlFor="passwordId">Password</label>
                                 <input
-                                    type="text"
-                                    id="lastNameId"
-                                    className="w-full"
+                                    type="password"
+                                    id="passwordId"
                                     onChange={(e) => handleChange(e)}
-                                    ref={lastNameRef}
+                                    ref={passwordRef}
                                 />
                             </div>
                         </div>
-                        <div className="flex flex-col">
-                            <label htmlFor="emailId">Email Address</label>
-                            <input
-                                type="text"
-                                id="emailId"
-                                onChange={(e) => handleChange(e)}
-                                ref={emailRef}
-                                
-                            />
+                        <button
+                            className="sign-up-button btn mt-3 mx-auto"
+                            onClick={() => handleSignUp()}
+                        >
+                            Create Account
+                        </button>
+                        <div className="sign-in-back mt-3 text-center">
+                            Already have an account?{" "}
+                            <Link className="" to="/sign-in">
+                                Sign in
+                            </Link>
                         </div>
-                        <div className="flex flex-col">
-                            <label htmlFor="passwordId">Password</label>
-                            <input
-                                type="password"
-                                id="passwordId"
-                                onChange={(e) => handleChange(e)}
-                                ref={passwordRef}
-                            />
-                        </div>
-                    </div>
-                    <button
-                        className="sign-up-button btn mt-3 mx-auto"
-                        onClick={() => handleSignUp()}
-                    >
-                        Create Account
-                    </button>
-                    <div className="sign-in-back mt-3 text-center">
-                        Already have an account?{" "}
-                        <Link className="" to="/sign-in">
-                            Sign in
-                        </Link>
                     </div>
                 </div>
             </div>
-        </div>
     );
 }

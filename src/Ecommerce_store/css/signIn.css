@@ -1,8 +1,6 @@
 .sign-in-home {
-    height: 100vh;
     width: 100%;
     display: flex;
-    padding-top: 72px;
 }
 .signIn-methods-container {
     height: 100%;
@@ -16,12 +14,6 @@
     flex-shrink: 0; /* Prevent shrinking */
 }
 @media screen and (max-width: 700px) {
-    .sign-in-home {
-        height: calc(100vh - 72px);
-    }
-    .sign-in-home {
-        padding-top: 0;
-    }
     .signIn-methods-container {
         width: 100%;
     }
@@ -89,10 +81,8 @@
     }
 }
 .sign-in-email {
-    height: 100vh;
     width: 100%;
     display: flex;
-    padding-top: 72px;
 }
 .sign-in-email .main {
     height: 100%;
@@ -107,11 +97,6 @@
 
 } */
 @media screen and (max-width: 700px) {
-    .sign-in-email {
-        height: calc(100vh - 72px);
-        padding-top: 0;
-
-    }
     .sign-in-email .main {
         width: 100%;
     }
@@ -122,11 +107,7 @@
     padding-top: 1em;
     margin-bottom: 1em;
 }
-@media screen and (max-width: 700px) {
-    .sign-in-email .main .welcome-text {
-        display: none;
-    }
-}
+
 .main .welcome-text span {
     height: 70px;
     padding: .7em 2em;

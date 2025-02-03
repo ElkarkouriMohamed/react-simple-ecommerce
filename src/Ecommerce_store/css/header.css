@@ -50,7 +50,7 @@ nav .shorthand-icons .menu-button {
     inset: 0;  /*<top> <right> <bottom> <left>;*/
     z-index: 12;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) {
     nav .links .close-button {
         display: flex;
         background-color: #f4f4f4;

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import {ReactComponent as UserIcon} from '../../icons/userIcon.svg';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import Footer from "../../footer/Footer";
 
 export default function SignInWithEmail() {
   const [emailIsValid, setEmailIsValid] = useState(true);
@@ -66,70 +67,70 @@ export default function SignInWithEmail() {
   };
 
   return (
-    <div className="sign-in-email">
-      <div className="coverImage"></div>
-      <div className="main">
-        <div className="welcome-text">
-          <span>Welcome back</span>
-        </div>
-        <div className="flex flex-col justify-center h-100">
-          <div className="userIcon">
-            <UserIcon />
+      <div className="sign-in-email mt-[56px] sm:mt-[72px] h-[calc(100vh-56px)] sm:h-[calc(100vh-72px)]">
+        <div className="coverImage"></div>
+        <div className="main">
+          <div className="welcome-text">
+            <span>Welcome back</span>
           </div>
-          {/* <div>email or password is incorrect!</div> */}
-          {
-            errorMessage.length > 0 &&
-            <div className="error-message text-red-600 text-center">
-              {errorMessage}
+          <div className="flex flex-col justify-center h-100">
+            <div className="userIcon">
+              <UserIcon />
             </div>
-          }
-          <div className="login-form">
-            <div className="form-email">
-              <input
-                type="text"
-                onChange={(e) => handleChange(e)}
-                id="email"
-                placeholder="Email"
-              />
-              {
-                !emailIsValid && 
-                <div className="email-errors text-red-600">
-                {emailIsValidMessage}
-                </div>
-              }
+            {/* <div>email or password is incorrect!</div> */}
+            {
+              errorMessage.length > 0 &&
+              <div className="error-message text-red-600 text-center">
+                {errorMessage}
+              </div>
+            }
+            <div className="login-form">
+              <div className="form-email">
+                <input
+                  type="text"
+                  onChange={(e) => handleChange(e)}
+                  id="email"
+                  placeholder="Email"
+                />
+                {
+                  !emailIsValid && 
+                  <div className="email-errors text-red-600">
+                  {emailIsValidMessage}
+                  </div>
+                }
+              </div>
+              <div className="form-password">
+                <input
+                  type="password"
+                  onChange={(e) => handleChange(e)}
+                  id="password"
+                  placeholder="Password"
+                />
+                {
+                  !passwordIsValid &&
+                  <div className="passowrd-errors text-red-600">Use at least 8 characters.</div>
+                }
+              </div>
+              <motion.button
+                initial={{ backgroundColor: '#686D76' }}
+                whileHover={{ backgroundColor: '#343131', scale: 1.05 }}
+                whileTap={{ backgroundColor: '#343131', scale: 1.05 }}
+                transition={{ 
+                  duration: .5,
+                  // type: 'spring'
+                }}
+                className="submit-button"
+                onClick={() => handleSignIn()}
+              >
+                Login
+              </motion.button>
+            </div>  
+            <div className="forgot-password">
+              <Link to='/password-reset'>Forgot Password?</Link>
             </div>
-            <div className="form-password">
-              <input
-                type="password"
-                onChange={(e) => handleChange(e)}
-                id="password"
-                placeholder="Password"
-              />
-              {
-                !passwordIsValid &&
-                <div className="passowrd-errors text-red-600">Use at least 8 characters.</div>
-              }
-            </div>
-            <motion.button
-              initial={{ backgroundColor: '#686D76' }}
-              whileHover={{ backgroundColor: '#343131', scale: 1.05 }}
-              whileTap={{ backgroundColor: '#343131', scale: 1.05 }}
-              transition={{ 
-                duration: .5,
-                // type: 'spring'
-              }}
-              className="submit-button"
-              onClick={() => handleSignIn()}
-            >
-              Login
-            </motion.button>
-          </div>  
-          <div className="forgot-password">
-            <Link to='/password-reset'>Forgot Password?</Link>
           </div>
         </div>
       </div>
-    </div>
   );
 }
 

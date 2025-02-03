@@ -6,24 +6,24 @@ import emailIcon from "../icons/email.svg";
 export default function SignIn() {
   const navigate = useNavigate();
   return (
-    <div className="sign-in-home">
-      <div className="coverImage"></div>
-      <div className="signIn-methods-container">
-        <div className="login-title">Log in</div>
-        <div className="login-methods">
-          <SignInWithGoogle />
-          <button className="email" onClick={() => navigate("/sign-in-email")}>
-            <img src={emailIcon} alt="email" />
-            <span>Continue with email</span>
-          </button>
-        </div>
-        <div className="sign-up-choice">
-          Don't you have an account?{' '}
-          <Link className="sing-up" to="/sign-up">
-            Sign up
-          </Link>
+      <div className="sign-in-home mt-[56px] sm:mt-[72px] h-[calc(100vh-56px)] sm:h-[calc(100vh-72px)]">
+        <div className="coverImage"></div>
+        <div className="signIn-methods-container">
+          <div className="login-title">Log in</div>
+          <div className="login-methods">
+            <SignInWithGoogle />
+            <button className="email" onClick={() => navigate("/sign-in-email")}>
+              <img src={emailIcon} alt="email" />
+              <span>Continue with email</span>
+            </button>
+          </div>
+          <div className="sign-up-choice">
+            Don't you have an account?{' '}
+            <Link className="sing-up" to="/sign-up">
+              Sign up
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
   );
 }

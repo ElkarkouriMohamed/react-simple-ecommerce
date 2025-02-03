@@ -26,7 +26,6 @@ function App() {
         <Route path='/best-sellers' element={<div>contact</div>} />
         <Route path='/categories' element={<div>categories</div>} />
       </Routes>
-      <Footer />
     </Provider>
   );
 }

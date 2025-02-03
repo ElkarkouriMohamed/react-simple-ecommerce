@@ -1,5 +1,5 @@
 import "../css/header.css";
-import { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
@@ -16,9 +16,9 @@ import { openCart, closeCart } from "../../features/cart/cartSlice";
 import { Toaster, toast } from "sonner";
 
 
-export default function Header() {
-  const [navbarShow, setNavbarShow] = useState(null);
+const Header = () => {
   const media = window.matchMedia("(width < 1024px)");
+  const [navbarShow, setNavbarShow] = useState(null);
   const [isMobile, setIsMobile] = useState(media.matches);
   const [isVisible, setIsVisible] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -29,8 +29,22 @@ export default function Header() {
   const shoppingList = useSelector((state) => state.shopping.shoppingList);
   const wishList = useSelector((state) => state.shopping.wishList);
   const cartIsOpen = useSelector(state => state.cart.isOpen);
-
   const cartCount = shoppingList.reduce((acc, e) => acc + e.quantity, 0);
+
+    console.log('component mounted!');
+
+  useEffect(() => {
+    const handleResize = (e) => {
+      setIsMobile(e.matches);
+    };
+  
+    media.addEventListener("change", handleResize);
+  
+    return () => {
+      media.removeEventListener("change", handleResize);
+    };
+  }, []);
+  
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -43,20 +57,20 @@ export default function Header() {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [dispatch]);
 
-  useEffect(() => {
-    handelNavbar();
-  }, [isMobile, isVisible]);
-
-  const handelNavbar = () => {
+  const handleNavbar = useCallback(() => {
     if (isMobile) {
       isVisible ? setNavbarShow(true) : setNavbarShow(false);
     } else {
       setNavbarShow(true);
       setIsVisible(false);
     }
-  };
+  }, [isMobile, isVisible])
+
+  useEffect(() => {
+    handleNavbar();
+  }, [handleNavbar]);
 
   const openSidebar = () => {
     setIsVisible(true);
@@ -65,11 +79,6 @@ export default function Header() {
   const closeSidebar = () => {
     setIsVisible(false);
   };
-
-  media.addEventListener("change", (e) => {
-    const match = e.matches;
-    setIsMobile(match);
-  });
 
   const parentVariants = {
     hidden: isMobile ? { x: -300 } : {},
@@ -93,7 +102,7 @@ export default function Header() {
         <AnimatePresence>
           {navbarShow && (
             <motion.div
-              className="links lg:flex items-center text-lg lg:text-lg font-medium gap-8  z-30"
+              className="links lg:flex items-center text-lg lg:text-lg font-medium gap-8 z-30"
               id="navbar"
               key="nav"
               variants={parentVariants}
@@ -188,6 +197,7 @@ export default function Header() {
               {isConnected ? (
                 <img
                   src={`${userInfo.photoURL}`}
+                  alt="Profile"
                   className="h-7 w-7 sm:h-9 sm:w-9 rounded-full"
                   onError={(e) => {
                     e.target.onerror = null; // Prevent infinite loop
@@ -225,3 +235,5 @@ export default function Header() {
     </>
   );
 }
+
+export default Header;
