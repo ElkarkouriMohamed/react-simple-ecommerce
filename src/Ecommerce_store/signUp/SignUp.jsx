@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SignInWithGoogle from "../signIn/withGoogle/SignInWithGoogle";
 import "../css/signUp.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import Footer from "../footer/Footer";
+import { useDispatch } from "react-redux";
+import { setLogin } from "../../features/user/userSlice";
 
 export default function SignUp() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [isValid, setIsvalid] = useState(false);
     const [message, setMessage] = useState("");
     const [formData, setFormData] = useState({
@@ -67,7 +71,6 @@ export default function SignUp() {
             lastName.length > 0 && 
             password.length >= 8 && 
             emailRegex.test(email);
-        console.log(isValidForm)
         setIsvalid(isValidForm);
 
         setFormData({firstName, lastName, email, password});
@@ -78,15 +81,17 @@ export default function SignUp() {
         if (isValid) {
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+                const fullName = `${formData.firstName} ${formData.lastName}`;
                 await updateProfile(userCredential.user, {
-                    displayName: `${formData.firstName} ${formData.lastName}`,
+                    'displayName': fullName,
                 });
                 // const userCredential = await createUserWithEmailAndPassword(auth, 'youssef@gmail.com', 'med@2002');
                 const user = userCredential.user;
-                console.log("Successfully created user:", user);
-                console.log('sign-up done');
+                const { uid, displayName, email, photoURL } = user;
+                dispatch(setLogin({ uid, displayName, email, photoURL }));
+                navigate('/');
             } catch (error) {
-                console.log(error.code);
+                setMessage(getErrorMessage(error.code));
             }
         }
     };

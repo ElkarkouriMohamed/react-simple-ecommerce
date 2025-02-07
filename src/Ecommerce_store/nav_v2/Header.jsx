@@ -9,11 +9,13 @@ import { setLogin, setLogout } from "../../features/user/userSlice";
 import userIcon from "../icons/userIcon.svg";
 import { ReactComponent as Menu } from "../icons/menu-nv.svg";
 //import Logout from "../logout/Logout";
-import { ShoppingBagIcon, HeartIcon } from "@heroicons/react/24/outline";
+import { ShoppingBagIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { UserIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import Cart from "./cart/Cart";
 import { openCart, closeCart } from "../../features/cart/cartSlice";
 import { Toaster, toast } from "sonner";
+import useShoppingList from "../../hooks/useShoppingList";
+import UserProfile from "../userProfile/UserProfile";
 
 
 const Header = () => {
@@ -30,8 +32,7 @@ const Header = () => {
   const wishList = useSelector((state) => state.shopping.wishList);
   const cartIsOpen = useSelector(state => state.cart.isOpen);
   const cartCount = shoppingList.reduce((acc, e) => acc + e.quantity, 0);
-
-    console.log('component mounted!');
+  const { setUserShoppingList, fetchUserShoppingList, setUserWishList, fetchUserWishList } = useShoppingList();
 
   useEffect(() => {
     const handleResize = (e) => {
@@ -45,12 +46,21 @@ const Header = () => {
     };
   }, []);
   
+  useEffect(() => {
+    if (isConnected) setUserShoppingList(userInfo.uid, shoppingList);
+  }, [shoppingList])
+
+  useEffect(() => {
+    if (isConnected) setUserWishList(userInfo.uid, wishList);
+  }, [wishList])
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        const { displayName, email, photoURL } = currentUser;
-        dispatch(setLogin({ displayName, email, photoURL }));
+        const { uid, displayName, email, photoURL } = currentUser;
+        dispatch(setLogin({ uid, displayName, email, photoURL }));
+        fetchUserShoppingList(uid);
+        fetchUserWishList(uid);
       } else {
         dispatch(setLogout());
       }
@@ -80,6 +90,10 @@ const Header = () => {
     setIsVisible(false);
   };
 
+  const handleProfileShow = () => {
+    setShowProfile(false);
+  }
+
   const parentVariants = {
     hidden: isMobile ? { x: -300 } : {},
     visible: isMobile
@@ -91,8 +105,6 @@ const Header = () => {
     exit: isMobile ? { x: -300, transition: { duration: 0.3 } } : {},
   };
 
-  //const AnimatedLink = motion.create(Link);
-
   return (
     <>
       <nav className="flex justify-between items-center p-2 sm:p-3 md:px-8 z-10">
@@ -102,7 +114,7 @@ const Header = () => {
         <AnimatePresence>
           {navbarShow && (
             <motion.div
-              className="links lg:flex items-center text-lg lg:text-lg font-medium gap-8 z-30"
+              className="links lg:flex items-center text-lg lg:text-lg font-medium gap-8 z-40"
               id="navbar"
               key="nav"
               variants={parentVariants}
@@ -175,8 +187,7 @@ const Header = () => {
         <div className="shorthand-icons flex items-center">
           <div>
             <button className="icon relative">
-              <HeartIcon className="h-6 w-6 sm:h-8 sm:w-8" />
-              <span className="bg-red-400">{wishList.length}</span>
+            <MagnifyingGlassIcon  className="h-6 w-6 sm:h-8 sm:w-8"  />
             </button>
           </div>
           <div>
@@ -215,16 +226,19 @@ const Header = () => {
             </button>
           </div>
         </div>
-          {(isVisible || cartIsOpen) && (
+          {(isVisible || cartIsOpen || showProfile) && (
             <div
               id="overlay"
               onClick={() => {
                 closeSidebar()
-                dispatch(closeCart())}}
+                dispatch(closeCart())
+                setShowProfile(false)
+              }}
             ></div>
           )}
       </nav>
       <Cart cartCount={cartCount}/>
+      <UserProfile showProfile={showProfile} handleProfileShow={handleProfileShow} />
       <Toaster 
           position="top-right" 
           toastOptions={{

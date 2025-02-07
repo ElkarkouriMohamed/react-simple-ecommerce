@@ -48,7 +48,7 @@ nav .shorthand-icons .menu-button {
 #overlay{
     position: fixed;
     inset: 0;  /*<top> <right> <bottom> <left>;*/
-    z-index: 12;
+    z-index: 20;
 }
 @media screen and (max-width: 1023px) {
     nav .links .close-button {

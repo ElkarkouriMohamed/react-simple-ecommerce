@@ -44,10 +44,11 @@
     border-radius: .3em;
     cursor: pointer;
     background: none;
+    transition: background-color 300ms;
 }
 .signIn-methods-container .google:hover, 
 .signIn-methods-container .email:hover {
-    background-color: #f8ede7;
+    background-color: #727D73;
 }
 .google span, .email span {
     font-size: 16px;

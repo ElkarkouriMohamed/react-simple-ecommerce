@@ -16,7 +16,7 @@ import {
   setTotal,
 } from "../../../features/shopping/shoppingSlice";
 import { useEffect } from "react";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 
 export default function Cart({cartCount}) {
   const dispatch = useDispatch();
@@ -38,8 +38,7 @@ export default function Cart({cartCount}) {
   }, [cartCount])
 
   return (
-    <>
-      
+    <>    
       <AnimatePresence>
         {cartIsOpen && (
           <motion.div
@@ -56,7 +55,7 @@ export default function Cart({cartCount}) {
                   onClick={() => dispatch(closeCart())}
                   className="text-gray-500"
                 >
-                  <XMarkIcon className="h-6 w-6" />
+                  <XMarkIcon className="h-6 w-6 transition-transform duration-700 hover:rotate-90" />
                 </button>
               </div>
               <hr />
@@ -68,15 +67,15 @@ export default function Cart({cartCount}) {
                     <div className="bg-[#f9f9f9] w-1/3">
                       <img src={e.thumbnail} alt="" className="" />
                     </div>
-                    <div className="p-2 flex w-2/3 justify-between">
+                    <div className="flex w-2/3 justify-between">
                       <div className="tracking-wide flex">
-                        <div className="flex flex-col justify-center gap-2">
+                        <div className="flex flex-col justify-around px-2">
                           <div className="text-[13px] text-gray-500">
                             {e.title}
                           </div>
                           <div className="flex items-center gap-3">
                             <div className="flex w-[100px]">
-                              <div className="item-count w-4/5 border-[1px] border-r-0 border-gray-300 text-sm p-1 text-gray-400">
+                              <div className="item-count w-4/5 border-[1px] border-r-0 border-gray-300 text-sm p-2 text-gray-400">
                                 {e.quantity}
                               </div>
                               <div className="arrows w-1/5 border-[1px] border-gray-300">

@@ -29,10 +29,6 @@ export default function SignInWithEmail() {
     );
   };
 
-  useEffect(() => {
-    console.log("errorMessage", errorMessage);
-  }, [errorMessage]);
-
   const handleChange = (e) => {
     const name = e.target.id;
     const value = e.target.value.trim();

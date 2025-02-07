@@ -67,12 +67,12 @@ const Shop = () => {
           {products.map((e, k) => (
             <li
               key={k} //w-[160px] low:w-auto //flex flex-wrap justify-center gap-4
-              className="flex w-[326px] flex-col gap-2 low:hover:shadow-[0_3px_30px_0px_rgba(0,0,0,0.2)] rounded-lg transition-shadow duration-700 border-[1px] border-gray-200"
+              className="flex w-[326px] flex-col gap-2 low:hover:shadow-[0_3px_30px_0px_rgba(0,0,0,0.2)] rounded-sm transition-shadow duration-700 low:border-[1px] border-gray-200 overflow-hidden"
             >
-              <div className="img-container bg-[#f2f2f2] w-full h-[324px] flex justify-center rounded-md overflow-hidden relative">
+              <div className="img-container bg-[#f2f2f2] w-full h-[324px] flex justify-center relative">
                 <img
                   src={e.thumbnail}
-                  alt=""
+                  alt="product"
                   className="hover:scale-110 transition-transform duration-700"
                   onLoad={() => dispatch(finishLoading(e.id))}
                   loading="lazy"
@@ -92,7 +92,7 @@ const Shop = () => {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => {
-                      dispatch(addToCart(e));
+                      dispatch(addToCart(e));                      
                       toast(
                         <div className="flex items-center gap-2 p-2">
                           <img

@@ -8,12 +8,18 @@ const shoppingSlice = createSlice({
         total: 0,
     },
     reducers: {
+        setShoppingList: (state, action) => {
+            state.shoppingList = action.payload;
+        },
         addToCart: (state, action) => {
             const item = state.shoppingList.find(e => e.id === action.payload.id);
             (item) ? item.quantity+=1 : state.shoppingList.push({...action.payload, 'quantity': 1});
         },
         removeFromCart: (state, action) => {
             state.shoppingList = state.shoppingList.filter(e => e.id !== action.payload);
+        },
+        setWishList: (state, action) => {
+            state.wishList = action.payload;
         },
         addToWishList: (state, action) => {
             const item = state.wishList.find(e => e.id === action.payload.id);
@@ -43,4 +49,4 @@ const shoppingSlice = createSlice({
 })
 
 export default shoppingSlice.reducer;
-export const { addToCart, removeFromCart, addToWishList, addQuantity, minusQuantity, setTotal } = shoppingSlice.actions;
+export const { setShoppingList, addToCart, removeFromCart, addToWishList, addQuantity, minusQuantity, setTotal, setWishList } = shoppingSlice.actions;
