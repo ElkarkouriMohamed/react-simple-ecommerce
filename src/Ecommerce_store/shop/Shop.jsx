@@ -3,8 +3,6 @@ import { fetchProducts } from "../../features/product/productSlice";
 import { useState, useEffect } from "react";
 import "../css/shop.css";
 import { ReactComponent as Spinner } from "../icons/spinner.svg";
-//import { ReactComponent as Star } from "../icons/star-fill.svg";
-//import { ReactComponent as HalfStar } from "../icons/star-half.svg";
 import { HeartIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { ShoppingCartIcon } from "lucide-react";
 import {
@@ -14,15 +12,15 @@ import {
 import { toast } from "sonner";
 import { finishLoading } from "../../features/images/imageSlice";
 import Footer from "../footer/Footer";
+import ProductShow from "./ProductShow";
 
 const Shop = () => {
-  const state = useSelector((state) => state.product);
-  const { products, loading, hasMore } = state;
+  const [productView, setProductView] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const { products, loading, hasMore } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   const [lastProduct, setLastProduct] = useState(null);
-  const wishList = useSelector((state) => state.shopping.wishList).map(
-    (e) => e.id
-  );
+  const wishList = useSelector((state) => state.shopping.wishList).map(e => e.id);
   const imagesLoading = useSelector(state => state.image.loading);
 
   useEffect(() => {
@@ -57,9 +55,27 @@ const Shop = () => {
     };
   }, [lastProduct, hasMore]);
 
+  const handleToast = (product, message) => {
+    toast(
+      <div className="flex items-center gap-2 p-2">
+        <img
+          src={product.thumbnail}
+          alt="Profile"
+          width="50"
+          height="50"
+        />
+        <span>{`${product.title} ${message}`}</span>
+      </div>
+    );
+  }
+
+  const closeProductView = () => {
+    setProductView(false);
+  }
+
   return (
     <>
-      <div className="shop-page mt-[56px] sm:mt-[72px] bg-[#ffffff]">
+      <div className="shop-page mt-[56px] sm:mt-[72px] bg-[#ffffff] perspective-[1000px]">
         {loading && (
           <Spinner className="w-14 h-14 animate-spin absolute top-1/2 left-1/2" />
         )}
@@ -73,7 +89,7 @@ const Shop = () => {
                 <img
                   src={e.thumbnail}
                   alt="product"
-                  className="hover:scale-110 transition-transform duration-700"
+                  className=""
                   onLoad={() => dispatch(finishLoading(e.id))}
                   loading="lazy"
                 />
@@ -93,17 +109,7 @@ const Shop = () => {
                   <button
                     onClick={() => {
                       dispatch(addToCart(e));                      
-                      toast(
-                        <div className="flex items-center gap-2 p-2">
-                          <img
-                            src={e.thumbnail}
-                            alt="Profile"
-                            width="50"
-                            height="50"
-                          />
-                          <span>{e.title} added to your cart</span>
-                        </div>
-                      );
+                      handleToast(e, 'added to your cart');
                     }}
                     className="bg-orange-600 text-white rounded-full p-2 sm:rounded-3xl sm:py-2 sm:px-4 flex items-center justify-center sm:gap-2"
                   >
@@ -111,7 +117,10 @@ const Shop = () => {
                     <ShoppingCartIcon className="w-5 h-5" />
                   </button>
                   <button
-                    onClick={() => dispatch(addToWishList(e))}
+                    onClick={() => {
+                      dispatch(addToWishList(e));
+                      handleToast(e, wishList.includes(e.id) ? 'removed from favorites list' : 'added to your your favorites list');
+                    }}
                     className={`${
                       wishList.includes(e.id)
                         ? `bg-red-400 text-white`
@@ -120,7 +129,12 @@ const Shop = () => {
                   >
                     <HeartIcon className="w-5 h-5" />
                   </button>
-                  <button className="bg-[#f2f2f2] low:hover:bg-orange-600 low:hover:text-white transition-colors duration-500 flex justify-center items-center p-2 rounded-full">
+                  <button 
+                    onClick={() => {
+                      setSelectedProduct(e);
+                      setProductView(true);
+                    }}
+                    className="bg-[#f2f2f2] low:hover:bg-orange-600 low:hover:text-white transition-colors duration-500 flex justify-center items-center p-2 rounded-full">
                     <EyeIcon className="w-5 h-5" />
                   </button>
                 </div>
@@ -129,10 +143,11 @@ const Shop = () => {
           ))}
         </ul>
       </div>
+      { productView && <div onClick={closeProductView} id="overlay" className="bg-[rgba(0,0,0,.16)]"></div>}
+      <ProductShow product={selectedProduct} productView={productView} closeProductView={closeProductView} />
       <Footer />
     </>
   );
 };
 
 export default Shop;
-//{`${e.id} ${e.title} ${e.price}`}

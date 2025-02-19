@@ -67,7 +67,7 @@ const Header = () => {
     });
 
     return () => unsubscribe();
-  }, [dispatch]);
+  }, []);
 
   const handleNavbar = useCallback(() => {
     if (isMobile) {

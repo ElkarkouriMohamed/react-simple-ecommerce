@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Montserrat:wght@500;700&display=swap");
+
+.card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  display: flex;
+  width: 666px;
+  background-color: white;
+  z-index: 50;
+  font-family: "Fraunces", serif;
+}
+
+.img_container {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0,0,0,.03); 
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  overflow: hidden;
+}
+
+/* #f2f2f2 */
+
+.img_container img {
+  width: 100%;
+  /* object-fit: cover; */
+}
+
+.details_container {
+  width: 50%;
+  padding: 2rem;
+  position: relative;
+}
+
+.details_container .name {
+  color: hsl(212, 21%, 14%);
+  padding-right: 2rem;
+  margin-bottom: 1.75rem;
+}
+
+.details_container .description {
+  font-family: "Montserrat";
+  font-size: 14px;
+  color: hsl(228, 12%, 48%);
+  line-height: 22px;
+  margin-bottom: 1.75rem;
+}
+
+.montserrat {
+  font-family: "Montserrat";
+  letter-spacing: 3px;
+  font-size: 14px;
+  color: hsl(228, 12%, 48%);
+  margin-bottom: 1.75rem;
+}
+
+.price_container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+
+.price_container .current_price {
+  color: hsl(158, 36%, 37%);
+}
+
+.price_container .old_price {
+  font-family: "Montserrat";
+  color: hsl(228, 12%, 48%);
+  text-decoration: line-through;
+}
+
+.details_container .btn {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background-color: hsl(158, 36%, 37%);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-family: "Montserrat";
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.details_container .btn:hover {
+  background-color: hsl(212, 21%, 14%);
+}
+
+@media only screen and (max-width: 550px) {
+  .card {
+    
+  }
+
+  .img_container {
+    width: 100%;
+    height: 40%;
+  }
+
+  /* .img_container img {
+    content: url("./images/image-product-mobile.jpg");
+  } */
+
+  .card {
+    flex-direction: column;
+  }
+
+  .details_container {
+    width: 100%;
+  }
+
+  .details_container .name {
+    padding-right: 0;
+  }
+
+  .img_container img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+  }
+}

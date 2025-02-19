@@ -7,7 +7,6 @@ import SignInWithEmail from './Ecommerce_store/signIn/withEmailAndPassword/SignI
 import PasswordReset from './Ecommerce_store/signIn/passwordReset/PasswordReset';
 import SignUp from './Ecommerce_store/signUp/SignUp';
 import Home from './Ecommerce_store/home/Home';
-import Footer from './Ecommerce_store/footer/Footer';
 import Shop from './Ecommerce_store/shop/Shop';
 
 function App() {
