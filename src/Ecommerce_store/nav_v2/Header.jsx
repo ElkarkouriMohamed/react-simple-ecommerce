@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogin, setLogout } from "../../features/user/userSlice";
 import userIcon from "../icons/userIcon.svg";
 import { ReactComponent as Menu } from "../icons/menu-nv.svg";
-//import Logout from "../logout/Logout";
 import { ShoppingBagIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { UserIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import Cart from "./cart/Cart";
@@ -16,7 +15,6 @@ import { openCart, closeCart } from "../../features/cart/cartSlice";
 import { Toaster, toast } from "sonner";
 import useShoppingList from "../../hooks/useShoppingList";
 import UserProfile from "../userProfile/UserProfile";
-
 
 const Header = () => {
   const media = window.matchMedia("(width < 1024px)");
@@ -133,7 +131,7 @@ const Header = () => {
               <div>
                 <Link
                   className="relative group"
-                  to="/shop"
+                  to="/products"
                   onClick={() => closeSidebar()}
                 >
                   Shop
@@ -162,7 +160,7 @@ const Header = () => {
               </div>
               <div>
                 <Link
-                  className="relative group"
+                  className="relahttp://localhost:3000tive group"
                   to="/deals"
                   onClick={() => closeSidebar()}
                 >

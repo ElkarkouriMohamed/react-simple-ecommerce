@@ -9,47 +9,57 @@ const ProductShow = ({ product, productView, closeProductView }) => {
   const dispatch = useDispatch();
 
   const priceAfterDiscount = (price, discount) => {
-    const percentage =  (price * discount) / 100;
+    const percentage = (price * discount) / 100;
     return (price - percentage).toFixed(2);
   };
 
   return (
     <>
-        
-            
-            <AnimatePresence>
-            {productView &&
-                <motion.div className="card shadow-lg -translate-x-1/2 -translate-y-1/2"
-                    initial={{ scale: .8, y: '-50%', x: '-50%' }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: .4 }}
-                    exit={{ opacity: .4, transition: { duration: .2 } }}
-                >
-                <div className="img_container">
-                    <img src={product.thumbnail} alt="" />
-                </div>
-                <div className="details_container">
-                    <button onClick={closeProductView} className="absolute top-2 right-2">
-                        <XCircleIcon className="h-9 w-9 text-slate-500" />
-                    </button>
-                    <p className="montserrat">{product.category}</p>
-                    <h1 className="name text-xl">{product.title}</h1>
-                    <p className="description">{product.description}</p>
+      <AnimatePresence>
+        {productView && (
+          <motion.div
+            className="card shadow-lg"
+            initial={{ scale: 0.8, opacity: .8,y: "-50%", x: "-50%" }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            exit={{ scale: 0.9, transition: { duration: 0.1 }}}
+          >
+            <div className="img_container">
+              <img src={product.thumbnail} alt="" />
+            </div>
+            <div className="details_container">
+              <button
+                onClick={closeProductView}
+                className="absolute top-2 right-2 cursor-pointer"
+              >
+                <XCircleIcon className="h-9 w-9 text-slate-500" />
+              </button>
+              <p className="montserrat">{product.category}</p>
+              <h1 className="name text-xl">{product.title}</h1>
+              <p className="description">{product.description}</p>
 
-                    <div className="price_container">
-                    <h1 className="current_price text-2xl">${priceAfterDiscount(product.price, product.discountPercentage)}</h1>
-                    <p className="old_price text-2xl">${product.price}</p>
-                    </div>
+              <div className="price_container">
+                <h1 className="current_price text-2xl">
+                  $
+                  {priceAfterDiscount(
+                    product.price,
+                    product.discountPercentage
+                  )}
+                </h1>
+                <p className="old_price text-2xl">${product.price}</p>
+              </div>
 
-                    <button className="btn" onClick={() => dispatch(addToCart(product))}>
-                    <img src={cartIcon} alt="icon" />
-                        Add to Cart
-                    </button>
-                </div>
-                </motion.div>
-                }
-            </AnimatePresence>
-        
+              <button
+                className="btn"
+                onClick={() => dispatch(addToCart(product))}
+              >
+                <img src={cartIcon} alt="icon" />
+                Add to Cart
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

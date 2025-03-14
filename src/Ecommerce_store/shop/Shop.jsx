@@ -83,7 +83,7 @@ const Shop = () => {
           {products.map((e, k) => (
             <li
               key={k} //w-[160px] low:w-auto //flex flex-wrap justify-center gap-4
-              className="flex w-[326px] flex-col gap-2 low:hover:shadow-[0_3px_30px_0px_rgba(0,0,0,0.2)] rounded-sm transition-shadow duration-700 low:border-[1px] border-gray-200 overflow-hidden"
+              className="flex w-[326px] flex-col gap-2 low:hover:shadow-[0_3px_30px_0px_rgba(0,0,0,0.2)] rounded-md transition-shadow duration-700 low:border-[1px] border-gray-200 overflow-hidden"
             >
               <div className="img-container bg-[#f2f2f2] w-full h-[324px] flex justify-center relative">
                 <img
@@ -134,7 +134,7 @@ const Shop = () => {
                       setSelectedProduct(e);
                       setProductView(true);
                     }}
-                    className="bg-[#f2f2f2] low:hover:bg-orange-600 low:hover:text-white transition-colors duration-500 flex justify-center items-center p-2 rounded-full">
+                    className="bg-[#f2f2f2] low:hover:bg-orange-600 low:hover:text-white transition-colors duration-500 hidden md:flex justify-center items-center p-2 rounded-full">
                     <EyeIcon className="w-5 h-5" />
                   </button>
                 </div>
